@@ -17,14 +17,10 @@ const routes: Routes = [
                 path: 'league',
                 loadChildren: () => import('../league/league.module').then(m => m.LeagueModule)
             },
-            // {
-            //     path: 'team',
-            //     loadChildren: () => import('../team/team.module').then(m => m.TeamModule)
-            // },
-            // {
-            //     path: 'player',
-            //     loadChildren: () => import('../player/player.module').then(m => m.PlayerModule)
-            // }
+            {
+                path: 'match',
+                loadChildren: () => import('../match/match.module').then(m => m.MatchModule)
+            }
         ]
     }
 ];

@@ -1,0 +1,18 @@
+@import './breakpoints.scss';
+
+@each $key, $value in $spacers {
+    @each $side in $sides {
+
+        // generate m* classes
+        .m#{str-slice($side, 0, 1)}-#{$key} {
+            margin-#{$side}: #{$value} !important;
+        }
+
+        // generate p* classes excluding key = auto
+        @if $key !=auto {
+            .p#{str-slice($side, 0, 1)}-#{$key} {
+                padding-#{$side}: #{$value} !important;
+            }
+        }
+    }
+}

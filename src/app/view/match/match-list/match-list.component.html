@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-12">
+            <button mat-flat-button color="primary">
+                Registrar partido
+                <mat-icon>sports_soccer</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @for (match of matches; track $index) {
+            <mat-card class="mt-4">
+                <mat-card-header class="bg-secondary-card-match">
+                    <mat-card-title>{{ match.matchDate | date }}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-4 team-container">
+                            <p>{{ match.localTeam }}</p>
+                        </div>
+                        <div class="col-4 result-container">
+                            <p class="mb-0">{{ match.result }}</p>
+                            <button mat-flat-button color="primary">{{match.status}}</button>
+                        </div>
+                        <div class="col-4 team-container">
+                            <p class="mb-0">{{ match.visitorTeam }}</p>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            }
+        </div>
+    </div>
+</div>
