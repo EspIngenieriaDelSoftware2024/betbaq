@@ -40,7 +40,22 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-package-lock.json
 
-/.vscode
+# Angular folder
 /.angular
+
+#VSCODE
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+package-lock.json
