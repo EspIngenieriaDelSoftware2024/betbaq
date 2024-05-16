@@ -14,6 +14,7 @@ import { MatchService } from '../../services/match/match.service';
 import moment from 'moment';
 import { DialogRef } from '@angular/cdk/dialog';
 import { TeamService } from '../../services/team/team.service';
+import { CalculateLeagueService } from '../../services/league/calculate-league.service';
 
 @Component({
   selector: 'match-create-dialog',
@@ -38,10 +39,11 @@ export class MatchCreateDialogComponent implements OnInit {
   teams!: TeamModel[];
 
   constructor(
+    private readonly _calculateLeagueService: CalculateLeagueService,
     private readonly _formBuilder: FormBuilder,
     private readonly _matchService: MatchService,
     private readonly _teamService: TeamService,
-    public _dialogRef: DialogRef<MatchCreateDialogComponent>
+    public _dialogRef: DialogRef<MatchCreateDialogComponent>,
   ) { }
 
   ngOnInit(): void {
@@ -72,6 +74,7 @@ export class MatchCreateDialogComponent implements OnInit {
     if (this.matchForm.valid) {
       const date = moment(this.matchForm.value.matchDate.getTime());
       const match: MatchModel = {
+        id: '',
         matchDate: +new Date(date.format('L')),
         matchData: [
           {
@@ -84,6 +87,7 @@ export class MatchCreateDialogComponent implements OnInit {
         ]
       };
       this._matchService.createOrUpdate(match);
+      this._calculateLeagueService.updateLeagueByMatch();
       this._dialogRef.close();
     }
   }

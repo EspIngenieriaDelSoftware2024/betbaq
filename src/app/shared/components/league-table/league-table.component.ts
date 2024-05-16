@@ -22,7 +22,7 @@ import { LeagueService } from '../../services/league/league.service';
   templateUrl: './league-table.component.html',
   styleUrl: './league-table.component.scss',
 })
-export class LeagueTableComponent implements OnInit {
+export class LeagueTableComponent {
 
   dataSource!: MatTableDataSource<LeagueModel>;
 
@@ -39,16 +39,11 @@ export class LeagueTableComponent implements OnInit {
   constructor(
     private readonly _leagueService: LeagueService
   ) {
+  }
+
+  ngOnInit(): void {
     this.getPaginatedData();
   }
-
-  ngOnInit(): void { }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
 
   showDetails(row: any) {
     console.log('Details:', row);
@@ -59,6 +54,8 @@ export class LeagueTableComponent implements OnInit {
     if (leagueData) {
       this.totalItems = leagueData.length
       this.dataSource = new MatTableDataSource(leagueData);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }
   }
 
