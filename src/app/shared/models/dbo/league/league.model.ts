@@ -3,7 +3,7 @@ import { TeamModel } from "../team/team.interface";
 
 export interface LeagueModel extends BaseModel {
     team: TeamModel;
-    lastDate: Date;
+    lastDate: number;
     goalsFor: number;
     goalsAgainst: number;
     points: number;

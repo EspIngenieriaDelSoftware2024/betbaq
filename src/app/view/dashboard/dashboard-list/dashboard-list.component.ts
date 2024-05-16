@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { LeagueTableComponent } from '../../../shared/components/league-table';
 import { CardTeamCreateComponent } from '../../../shared/components/dashboard';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-list',
@@ -12,6 +13,7 @@ import { CardTeamCreateComponent } from '../../../shared/components/dashboard';
     CommonModule,
     MatCardModule,
     MatIconModule,
+    RouterLink,
 
     LeagueTableComponent,
     CardTeamCreateComponent

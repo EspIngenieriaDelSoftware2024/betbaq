@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { LeagueInitService } from '../league/league-init.service';
+import { CalculateLeagueService } from '../league/calculate-league.service';
 import { MatchInitService } from '../match/match-init.service';
 import { TeamInitService } from '../team/team-init.service';
-import { UserService } from '../user/user.service';
 import { UserInitService } from '../user/user-init.service';
 
 @Injectable({
@@ -12,9 +11,9 @@ export class InitService {
 
   constructor(
     private readonly _userInitService: UserInitService,
-    private readonly _leagueInitService: LeagueInitService,
     private readonly _matchInitService: MatchInitService,
-    private readonly _teamInitService: TeamInitService
+    private readonly _teamInitService: TeamInitService,
+    private readonly _calculateLeagueService: CalculateLeagueService
   ) { }
 
   initData(): void {
@@ -33,6 +32,6 @@ export class InitService {
 
   createDataMatches() {
     const hasCreate = this._matchInitService.createDataMatches();
-    if (hasCreate) this._leagueInitService.createDataLeagues();
+    if (hasCreate) this._calculateLeagueService.updateLeagueByMatch();
   }
 }

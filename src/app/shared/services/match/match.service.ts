@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
+import { v4 as uuidv4 } from 'uuid';
 import { MatchModel } from '../../models/dbo/match/match.interface';
 import { BaseService } from '../base/base.service';
 import { StorageService } from '../storage/storage.service';
-import moment from 'moment';
-import { TeamService } from '../team/team.service';
-import { v4 as uuidv4 } from 'uuid';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +12,6 @@ export class MatchService extends BaseService<MatchModel> {
 
   constructor(
     _storageService: StorageService,
-    private readonly _teamService: TeamService,
   ) {
     const key = 'matchs';
     super(key, _storageService);
@@ -39,7 +36,4 @@ export class MatchService extends BaseService<MatchModel> {
     if (index === -1) return null;
     return { matches: data, index };
   }
-
-
-
 }
