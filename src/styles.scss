@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import './app/shared/styles/grid/grid.scss';
+@import './app/shared/styles/margin-padding/mixin.scss';
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

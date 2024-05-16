@@ -1,0 +1,39 @@
+@import './breakpoints.scss';
+
+// Función para obtener breakpoints
+@function breakpoint($key) {
+    @return map-get($grid-breakpoints, $key);
+}
+
+// Mixin para generar las clases de columna
+@mixin make-col($size, $columns: 12) {
+    width: calc(percentage(calc($size / $columns)) - (#{$col-margin} * 2));
+    flex: 0 0 calc(percentage(calc($size / $columns)) - (#{$col-margin} * 2));
+    max-width: calc(percentage(calc($size / $columns)) - (#{$col-margin} * 2));
+    margin-left: $col-margin;
+    margin-right: $col-margin;
+}
+
+// Mixin para las clases de columnas generales
+@mixin make-col-classes($columns: 12) {
+    @for $i from 1 through $columns {
+        .col-#{$i} {
+            @include make-col($i, $columns);
+        }
+    }
+}
+
+// Mixin para las clases de columnas con breakpoints
+@mixin make-grid-columns($columns: 12) {
+    @include make-col-classes($columns);
+
+    @each $breakpoint, $value in $grid-breakpoints {
+        @for $i from 1 through $columns {
+            .col-#{$breakpoint}-#{$i} {
+                @media (min-width: breakpoint($breakpoint)) {
+                    @include make-col($i, $columns);
+                }
+            }
+        }
+    }
+}
