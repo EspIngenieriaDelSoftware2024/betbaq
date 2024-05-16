@@ -1,0 +1,98 @@
+<h1 mat-dialog-title>Registrar equipo</h1>
+<mat-dialog-content>
+    <form [formGroup]="teamForm" (submit)="save()">
+        <div class="row">
+            <div class="col-12">
+                <h2>Detalles</h2>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="full-form-field" appearance="outline">
+                    <input matInput formControlName="teamName" placeholder="Nombre del equipo">
+                    @if(getError('teamName', 'required')){
+                    <mat-error>
+                        Nombre del equipo es requerido
+                    </mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="full-form-field" appearance="outline">
+                    <input matInput formControlName="points" placeholder="Puntos" type="number">
+                    @if(getError('points', 'required')){
+                    <mat-error>
+                        Puntos son requeridos
+                    </mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="full-form-field" appearance="outline">
+                    <input matInput formControlName="playedMatches" placeholder="Partidos jugados" type="number">
+                    @if(getError('playedMatches', 'required')){
+                    <mat-error>
+                        Partidos jugados son requeridos
+                    </mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="full-form-field" appearance="outline">
+                    <input matInput formControlName="wonMatches" placeholder="Partidos ganados" type="number">
+                    @if(getError('wonMatches', 'required')){
+                    <mat-error>
+                        Partidos ganados son requeridos
+                    </mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="full-form-field" appearance="outline">
+                    <input matInput formControlName="drawnMatches" placeholder="Partidos empatados" type="number">
+                    @if(getError('drawnMatches', 'required')){
+                    <mat-error>
+                        Partidos empatados son requeridos
+                    </mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="full-form-field" appearance="outline">
+                    <input matInput formControlName="lostMatches" placeholder="Partidos perdidos" type="number">
+                    @if(getError('lostMatches', 'required')){
+                    <mat-error>
+                        Partidos perdidos son requeridos
+                    </mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="full-form-field" appearance="outline">
+                    <input matInput formControlName="goalsFor" placeholder="Goles a favor" type="number">
+                    @if(getError('goalsFor', 'required')){
+                    <mat-error>
+                        Goles a favor son requeridos
+                    </mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="full-form-field" appearance="outline">
+                    <input matInput formControlName="goalsAgainst" placeholder="Goles en contra" type="number">
+                    @if(getError('goalsAgainst', 'required')){
+                    <mat-error>
+                        Goles en contra son requeridos
+                    </mat-error>
+                    }
+                </mat-form-field>
+            </div>
+        </div>
+
+        <!-- Diferencia de goles (calculada) -->
+        <!-- <p>Diferencia de goles: {{ teamForm.get('goalsFor').value - teamForm.get('goalsAgainst').value }}</p> -->
+
+        <div mat-dialog-actions>
+            <button mat-button mat-dialog-close>Cancelar</button>
+            <button mat-flat-button color="primary" type="submit">Guardar</button>
+        </div>
+    </form>
+</mat-dialog-content>

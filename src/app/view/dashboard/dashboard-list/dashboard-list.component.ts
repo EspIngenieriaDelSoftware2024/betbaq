@@ -3,6 +3,7 @@ import { Component, type OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { LeagueTableComponent } from '../../../shared/components/league-table';
+import { CardTeamCreateComponent } from '../../../shared/components/dashboard';
 
 @Component({
   selector: 'app-dashboard-list',
@@ -12,7 +13,8 @@ import { LeagueTableComponent } from '../../../shared/components/league-table';
     MatCardModule,
     MatIconModule,
 
-    LeagueTableComponent
+    LeagueTableComponent,
+    CardTeamCreateComponent
   ],
   templateUrl: './dashboard-list.component.html',
   styleUrl: './dashboard-list.component.scss',
