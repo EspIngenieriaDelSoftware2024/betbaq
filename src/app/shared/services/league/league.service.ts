@@ -16,9 +16,9 @@ export class LeagueService {
     private readonly _dateRandomService: DateRandomService
   ) { }
 
-  getAll(): LeagueModel[] {
+  getAll(): LeagueModel[] | null {
     const data = this._storageService.getItem(KEY_ENDPOINT);
-    if (!data) return [];
+    if (!data) return null;
     return data;
   }
 

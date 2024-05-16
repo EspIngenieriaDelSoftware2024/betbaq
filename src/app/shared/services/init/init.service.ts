@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { RegisterService } from '../auth/register.service';
 import { LeagueService } from '../league/league.service';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import { LeagueService } from '../league/league.service';
 export class InitService {
 
   constructor(
-    private readonly _registerService: RegisterService,
+    private readonly _userService: UserService,
     private readonly _leagueService: LeagueService
   ) { }
 
@@ -18,22 +18,28 @@ export class InitService {
   }
 
   createUserAdmin() {
-    this._registerService.registerUser({
-      username: 'admin',
-      password: 'admin',
-      firstName: 'Admin',
-      lastName: 'Admin',
-      termsAccepted: true
-    });
+    const data = this._userService.getAll();
+    if (!data) {
+      this._userService.create({
+        username: 'admin',
+        password: 'admin',
+        firstName: 'Admin',
+        lastName: 'Admin',
+        termsAccepted: true
+      });
+    }
   }
 
   createDataLeagues() {
-    const leagues = [];
-    for (let index = 1; index <= 50; index++) {
-      const addLeagueRandom = this._leagueService.addLeagueRandom(index);
-      leagues.push(addLeagueRandom);
+    const data = this._leagueService.getAll();
+    if (!data || data.length === 0) {
+      const leagues = [];
+      for (let index = 1; index <= 50; index++) {
+        const addLeagueRandom = this._leagueService.addLeagueRandom(index);
+        leagues.push(addLeagueRandom);
+      }
+      this._leagueService.bulkCreate(leagues);
     }
-    this._leagueService.bulkCreate(leagues);
   }
 
 }

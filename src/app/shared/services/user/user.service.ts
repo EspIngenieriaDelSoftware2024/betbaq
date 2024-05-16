@@ -13,9 +13,9 @@ export class UserService {
     private readonly _storageService: StorageService
   ) { }
 
-  getAll(): UserModel[] {
+  getAll(): UserModel[] | null {
     const data = this._storageService.getItem(KEY_ENDPOINT);
-    if (!data) return [];
+    if (!data) return null;
     return data;
   }
 
@@ -29,12 +29,11 @@ export class UserService {
     this._storageService.setItem(KEY_ENDPOINT, data);
   }
 
-  getByUsername(username: string): UserModel | undefined {
+  getByUsername(username: string): UserModel | null {
     const data = this.getAll();
-    if (!data) {
-      return undefined;
-    }
-    return data.find((user: UserModel) => user.username == username);
+    if (!data) return null;
+    const user = data.find(user => user.username === username);
+    return user ? user : null;
   }
 
 }
