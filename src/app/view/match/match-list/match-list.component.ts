@@ -32,10 +32,10 @@ export class MatchListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.setMatches();
+    this.getMatches();
   }
 
-  setMatches() {
+  getMatches() {
     const data = this._matchService.getAll();
     if (data) {
       this.matches = data;
@@ -45,7 +45,7 @@ export class MatchListComponent implements OnInit {
   openDialog() {
     const dialogRef = this._matDialog.open(MatchCreateDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.getMatches();
     });
   }
 

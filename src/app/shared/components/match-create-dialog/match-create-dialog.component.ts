@@ -11,7 +11,8 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatchModel } from '../../models/dbo/match/match.interface';
 import { MatchService } from '../../services/match/match.service';
-
+import moment from 'moment';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'match-create-dialog',
@@ -44,7 +45,8 @@ export class MatchCreateDialogComponent implements OnInit {
 
   constructor(
     private readonly _formBuilder: FormBuilder,
-    private readonly _matchService: MatchService
+    private readonly _matchService: MatchService,
+    public _dialogRef: DialogRef<MatchCreateDialogComponent>
   ) { }
 
   ngOnInit(): void {
@@ -67,8 +69,9 @@ export class MatchCreateDialogComponent implements OnInit {
 
   save() {
     if (this.matchForm.valid) {
+      const date = moment(this.matchForm.value.matchDate.getTime());
       const match: MatchModel = {
-        matchDate: this.matchForm.value.matchDate.getTime(),
+        matchDate: +new Date(date.format('L')),
         matchData: [
           {
             localTeam: this.matchForm.value.localTeam,
@@ -79,7 +82,8 @@ export class MatchCreateDialogComponent implements OnInit {
           }
         ]
       };
-      this._matchService.create(match);
+      this._matchService.createOrUpdate(match);
+      this._dialogRef.close();
     }
   }
 

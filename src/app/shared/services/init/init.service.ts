@@ -37,7 +37,7 @@ export class InitService {
     const data = this._leagueService.getAll();
     if (!data || data.length === 0) {
       const leagues = [];
-      for (let index = 1; index <= 50; index++) {
+      for (let index = 1; index <= 15; index++) {
         const addLeagueRandom = this._leagueService.addLeagueRandom(index);
         leagues.push(addLeagueRandom);
       }
