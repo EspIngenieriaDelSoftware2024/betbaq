@@ -40,25 +40,6 @@ export class MatchService extends BaseService<MatchModel> {
     return { matches: data, index };
   }
 
-  addMatchRandom(index: number): MatchModel | null {
-    const date = moment(+new Date());
-    const teams = this._teamService.getAll();
-    if (!teams) return null;
 
-    const match: MatchModel = {
-      id: uuidv4(),
-      matchDate: +new Date(date.format('L')),
-      matchData: [
-        {
-          localTeam: teams[0],
-          visitorTeam: teams[1],
-          localGoals: `${Math.floor(Math.random() * 5)}`,
-          visitorGoals: `${Math.floor(Math.random() * 5)}`,
-          status: 'finished'
-        }
-      ]
-    };
-    return match;
-  }
 
 }

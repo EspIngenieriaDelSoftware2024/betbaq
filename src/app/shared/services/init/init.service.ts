@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { LeagueService } from '../league/league.service';
+import { LeagueInitService } from '../league/league-init.service';
+import { MatchInitService } from '../match/match-init.service';
+import { TeamInitService } from '../team/team-init.service';
 import { UserService } from '../user/user.service';
-import { MatchService } from '../match/match.service';
-import { TeamService } from '../team/team.service';
+import { UserInitService } from '../user/user-init.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,10 @@ import { TeamService } from '../team/team.service';
 export class InitService {
 
   constructor(
-    private readonly _userService: UserService,
-    private readonly _leagueService: LeagueService,
-    private readonly _matchService: MatchService,
-    private readonly _teamService: TeamService
+    private readonly _userInitService: UserInitService,
+    private readonly _leagueInitService: LeagueInitService,
+    private readonly _matchInitService: MatchInitService,
+    private readonly _teamInitService: TeamInitService
   ) { }
 
   initData(): void {
@@ -22,48 +23,16 @@ export class InitService {
   }
 
   createUserAdmin() {
-    const data = this._userService.getAll();
-    if (!data) {
-      this._userService.create(this._userService.addUserAdmin());
-    }
+    this._userInitService.createUserAdmin();
   }
 
   createDataTeams() {
-    const data = this._teamService.getAll();
-    if (!data || data.length === 0) {
-      const teams = [];
-      for (let index = 1; index <= 2; index++) {
-        const addTeamRandom = this._teamService.addTeamRandom(index);
-        teams.push(addTeamRandom);
-      }
-      this._teamService.bulkCreate(teams);
-      this.createDataMatches();
-    }
+    const hasCreate = this._teamInitService.createDataTeams();
+    if (hasCreate) this.createDataMatches();
   }
 
   createDataMatches() {
-    const data = this._matchService.getAll();
-    if (!data || data.length === 0) {
-      const matches = [];
-      for (let index = 1; index <= 1; index++) {
-        const addMatchRandom = this._matchService.addMatchRandom(index);
-        if (addMatchRandom) matches.push(addMatchRandom);
-      }
-      this._matchService.bulkCreate(matches);
-      this.createDataLeagues();
-    }
+    const hasCreate = this._matchInitService.createDataMatches();
+    if (hasCreate) this._leagueInitService.createDataLeagues();
   }
-
-  createDataLeagues() {
-    const data = this._leagueService.getAll();
-    if (!data || data.length === 0) {
-      const leagues = [];
-      for (let index = 1; index <= 15; index++) {
-        const addLeagueRandom = this._leagueService.addLeagueRandom(index);
-        leagues.push(addLeagueRandom);
-      }
-      this._leagueService.bulkCreate(leagues);
-    }
-  }
-
 }
