@@ -22,6 +22,6 @@ export class AppComponent{
   }
 
   initData(): void {
-    // this._initService.initData();
+    this._initService.initData();
   }
 }

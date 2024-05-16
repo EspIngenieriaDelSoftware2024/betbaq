@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { StorageService } from '../storage/storage.service';
 import { UserModel } from '../../models/dbo/user/user.model';
 
+const KEY_ENDPOINT: string = 'users';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,25 +14,27 @@ export class UserService {
   ) { }
 
   getAll(): UserModel[] {
-    return this._storageService.getItem('users');
+    const data = this._storageService.getItem(KEY_ENDPOINT);
+    if (!data) return [];
+    return data;
   }
 
   create(user: UserModel) {
-    const users = this.getAll();
-    if (!users) {
-      this._storageService.setItem('users', [user]);
+    const data = this.getAll();
+    if (!data) {
+      this._storageService.setItem(KEY_ENDPOINT, [user]);
       return;
     }
-    users.push(user);
-    this._storageService.setItem('users', users);
+    data.push(user);
+    this._storageService.setItem(KEY_ENDPOINT, data);
   }
 
   getByUsername(username: string): UserModel | undefined {
-    const users = this.getAll();
-    if (!users) {
+    const data = this.getAll();
+    if (!data) {
       return undefined;
     }
-    return users.find((user: UserModel) => user.username == username);
+    return data.find((user: UserModel) => user.username == username);
   }
 
 }
