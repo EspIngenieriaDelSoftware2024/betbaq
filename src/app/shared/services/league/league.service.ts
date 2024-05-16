@@ -2,38 +2,22 @@ import { Injectable } from '@angular/core';
 import { StorageService } from '../storage/storage.service';
 import { LeagueModel } from '../../models/dbo/league/league.model';
 import { DateRandomService } from '../common/date-random.service';
-
-const KEY_ENDPOINT: string = 'teams';
+import { BaseService } from '../base/base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LeagueService {
+export class LeagueService extends BaseService<LeagueModel> {
 
+  private apiRoot: string;
 
   constructor(
-    private readonly _storageService: StorageService,
+    _storageService: StorageService,
     private readonly _dateRandomService: DateRandomService
-  ) { }
-
-  getAll(): LeagueModel[] | null {
-    const data = this._storageService.getItem(KEY_ENDPOINT);
-    if (!data) return null;
-    return data;
-  }
-
-  create(league: LeagueModel) {
-    const data = this.getAll();
-    if (!data) {
-      this._storageService.setItem(KEY_ENDPOINT, [league]);
-      return;
-    }
-    data.push(league);
-    this._storageService.setItem(KEY_ENDPOINT, data);
-  }
-
-  bulkCreate(leagues: LeagueModel[]) {
-    this._storageService.setItem(KEY_ENDPOINT, leagues);
+  ) {
+    const key = 'teams';
+    super(key, _storageService);
+    this.apiRoot = key;
   }
 
   addLeagueRandom(index: number): LeagueModel {
@@ -45,5 +29,4 @@ export class LeagueService {
       points: Math.floor(Math.random() * 20)
     }
   }
-
 }

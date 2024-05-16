@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row mt-4">
         <div class="col-12">
-            <button mat-flat-button color="primary">
+            <button mat-flat-button color="primary" (click)="openDialog()">
                 Registrar partido
                 <mat-icon>sports_soccer</mat-icon>
             </button>
@@ -15,18 +15,21 @@
                     <mat-card-title>{{ match.matchDate | date }}</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
+                    @for (matchData of match.matchData; track $index) {
+
                     <div class="row">
                         <div class="col-4 team-container">
-                            <p>{{ match.localTeam }}</p>
+                            <p>{{ matchData.localTeam.teamName }}</p>
                         </div>
                         <div class="col-4 result-container">
-                            <p class="mb-0">{{ match.result }}</p>
-                            <button mat-flat-button color="primary">{{match.status}}</button>
+                            <p class="mb-0">{{ matchData.localGoals }} - {{ matchData.visitorGoals }}</p>
+                            <button mat-flat-button color="primary">{{matchData.status}}</button>
                         </div>
                         <div class="col-4 team-container">
-                            <p class="mb-0">{{ match.visitorTeam }}</p>
+                            <p class="mb-0">{{ matchData.visitorTeam.teamName }}</p>
                         </div>
                     </div>
+                    }
                 </mat-card-content>
             </mat-card>
             }

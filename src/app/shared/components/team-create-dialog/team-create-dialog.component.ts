@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-team-create-dialog',
+  selector: 'team-create-dialog',
   standalone: true,
   imports: [
     CommonModule,
@@ -25,7 +25,7 @@ export class TeamCreateDialogComponent {
   teamForm!: FormGroup;
 
   constructor(
-    private _formBuilder: FormBuilder
+    private readonly _formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {

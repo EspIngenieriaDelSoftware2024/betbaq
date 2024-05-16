@@ -2,7 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, type OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatchCreateDialogComponent } from '../../../shared/components/match-create-dialog';
+import { DialogModule } from '@angular/cdk/dialog';
+import { MatchModel } from '../../../shared/models/dbo/match/match.interface';
+import { MatchService } from '../../../shared/services/match/match.service';
 
 @Component({
   selector: 'app-match-list',
@@ -11,31 +16,37 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    DialogModule
   ],
   templateUrl: './match-list.component.html',
   styleUrl: './match-list.component.scss',
 })
 export class MatchListComponent implements OnInit {
 
-  matches: any[] = [
-    {
-      matchDate: +new Date('2024-01-01'),
-      localTeam: 'Team A',
-      visitorTeam: 'Team B',
-      result: '2-1',
-      status: 'finished'
-    },
-    {
-      matchDate: +new Date('2024-01-02'),
-      localTeam: 'Team C',
-      visitorTeam: 'Team D',
-      result: '0-0',
-      status: 'ongoing'
-    },
-    // Add more matches here
-  ];
+  matches!: MatchModel[];
 
-  ngOnInit(): void { }
+  constructor(
+    private readonly _matDialog: MatDialog,
+    private readonly _matchService: MatchService
+  ) { }
+
+  ngOnInit(): void {
+    this.setMatches();
+  }
+
+  setMatches() {
+    const data = this._matchService.getAll();
+    if (data) {
+      this.matches = data;
+    }
+  }
+
+  openDialog() {
+    const dialogRef = this._matDialog.open(MatchCreateDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
 }
