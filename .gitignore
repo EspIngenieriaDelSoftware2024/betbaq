@@ -51,6 +51,7 @@ Thumbs.db
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
+.vscode/*.json
 
 # Local History for Visual Studio Code
 .history/
@@ -59,3 +60,4 @@ Thumbs.db
 *.vsix
 
 package-lock.json
+
