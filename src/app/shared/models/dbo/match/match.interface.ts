@@ -1,6 +1,7 @@
+import { BaseModel } from "../base/base.interface";
 import { TeamModel } from "../team/team.interface";
 
-export interface MatchModel {
+export interface MatchModel extends BaseModel {
     matchDate: number;
     matchData: MatchData[];
 }
