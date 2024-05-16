@@ -13,6 +13,7 @@ import { MatchModel } from '../../models/dbo/match/match.interface';
 import { MatchService } from '../../services/match/match.service';
 import moment from 'moment';
 import { DialogRef } from '@angular/cdk/dialog';
+import { TeamService } from '../../services/team/team.service';
 
 @Component({
   selector: 'match-create-dialog',
@@ -34,23 +35,18 @@ import { DialogRef } from '@angular/cdk/dialog';
 export class MatchCreateDialogComponent implements OnInit {
 
   matchForm!: FormGroup;
-  teams: TeamModel[] = [
-    {
-      teamName: 'Team A'
-    },
-    {
-      teamName: 'Team B'
-    },
-  ];
+  teams!: TeamModel[];
 
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _matchService: MatchService,
+    private readonly _teamService: TeamService,
     public _dialogRef: DialogRef<MatchCreateDialogComponent>
   ) { }
 
   ngOnInit(): void {
     this.buildForm();
+    this.getTeams();
   }
 
   buildForm(): void {
@@ -65,6 +61,11 @@ export class MatchCreateDialogComponent implements OnInit {
 
   getError(controlName: string, error: string): boolean {
     return this.matchForm.controls[controlName].hasError(error);
+  }
+
+  getTeams(): void {
+    const data = this._teamService.getAll();
+    if (data) this.teams = data;
   }
 
   save() {

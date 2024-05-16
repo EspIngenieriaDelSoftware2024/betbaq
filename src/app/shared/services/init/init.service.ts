@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LeagueService } from '../league/league.service';
 import { UserService } from '../user/user.service';
 import { MatchService } from '../match/match.service';
+import { TeamService } from '../team/team.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,13 @@ export class InitService {
   constructor(
     private readonly _userService: UserService,
     private readonly _leagueService: LeagueService,
-    private readonly _matchService: MatchService
+    private readonly _matchService: MatchService,
+    private readonly _teamService: TeamService
   ) { }
 
   initData(): void {
     this.createUserAdmin();
-    this.createDataLeagues();
-    this.createDataMatches();
+    this.createDataTeams();
   }
 
   createUserAdmin() {
@@ -33,15 +34,16 @@ export class InitService {
     }
   }
 
-  createDataLeagues() {
-    const data = this._leagueService.getAll();
+  createDataTeams() {
+    const data = this._teamService.getAll();
     if (!data || data.length === 0) {
-      const leagues = [];
-      for (let index = 1; index <= 15; index++) {
-        const addLeagueRandom = this._leagueService.addLeagueRandom(index);
-        leagues.push(addLeagueRandom);
+      const teams = [];
+      for (let index = 1; index <= 2; index++) {
+        const addTeamRandom = this._teamService.addTeamRandom(index);
+        teams.push(addTeamRandom);
       }
-      this._leagueService.bulkCreate(leagues);
+      this._teamService.bulkCreate(teams);
+      this.createDataMatches();
     }
   }
 
@@ -51,9 +53,22 @@ export class InitService {
       const matches = [];
       for (let index = 1; index <= 1; index++) {
         const addMatchRandom = this._matchService.addMatchRandom(index);
-        matches.push(addMatchRandom);
+        if (addMatchRandom) matches.push(addMatchRandom);
       }
       this._matchService.bulkCreate(matches);
+      this.createDataLeagues();
+    }
+  }
+
+  createDataLeagues() {
+    const data = this._leagueService.getAll();
+    if (!data || data.length === 0) {
+      const leagues = [];
+      for (let index = 1; index <= 15; index++) {
+        const addLeagueRandom = this._leagueService.addLeagueRandom(index);
+        leagues.push(addLeagueRandom);
+      }
+      this._leagueService.bulkCreate(leagues);
     }
   }
 

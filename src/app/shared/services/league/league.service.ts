@@ -15,7 +15,7 @@ export class LeagueService extends BaseService<LeagueModel> {
     _storageService: StorageService,
     private readonly _dateRandomService: DateRandomService
   ) {
-    const key = 'teams';
+    const key = 'league';
     super(key, _storageService);
     this.apiRoot = key;
   }
