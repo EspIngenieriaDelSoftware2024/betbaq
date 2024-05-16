@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
+import { RegisterService } from '../auth/register.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +8,11 @@ import { AuthService } from '../auth/auth.service';
 export class InitService {
 
   constructor(
-    private readonly _authService: AuthService
+    private readonly _registerService: RegisterService
   ) { }
 
   initData(): void {
-    this._authService.registerUser({
+    this._registerService.registerUser({
       username: 'admin',
       password: 'admin',
       firstName: 'Admin',

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserModel } from '../../models/dbo/user/user.model';
 import { RegisterService } from './register.service';
+import { StorageService } from '../storage/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,16 @@ import { RegisterService } from './register.service';
 export class AuthService {
 
   constructor(
-    private readonly _registerService: RegisterService
+    private readonly _storageService: StorageService
   ) { }
 
-  registerUser(user: UserModel) {
-    this._registerService.registerUser(user);
+
+  setSession(user: UserModel) {
+    this._storageService.setItem('user', user);
   }
+
+  getSession(user: UserModel) {
+    this._storageService.getItem('user');
+  }
+
 }

@@ -2,12 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { AuthService } from '../../../shared/services/auth/auth.service';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { RouterLink } from '@angular/router';
+import { RegisterService } from '../../../shared/services/auth/register.service';
+import { UserModel } from '../../../shared/models/dbo/user/user.model';
 
 @Component({
   selector: 'app-register-create',
@@ -20,7 +22,8 @@ import { MatCardModule } from '@angular/material/card';
     MatCheckboxModule,
     ReactiveFormsModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    RouterLink
   ],
   templateUrl: './register-create.component.html',
   styleUrl: './register-create.component.scss',
@@ -30,8 +33,8 @@ export class RegisterCreateComponent {
   public registrationForm!: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService
+    private readonly _formBuilder: FormBuilder,
+    private readonly _registerService: RegisterService
   ) { }
 
   ngOnInit(): void {
@@ -39,7 +42,7 @@ export class RegisterCreateComponent {
   }
 
   buildForm(): void {
-    this.registrationForm = this.formBuilder.group({
+    this.registrationForm = this._formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
       firstName: ['', Validators.required],
@@ -50,8 +53,8 @@ export class RegisterCreateComponent {
 
   onSubmit(): void {
     if (this.registrationForm.valid) {
-      const user = this.registrationForm.value;
-      this.authService.registerUser(user);
+      const user = this.registrationForm.getRawValue() as UserModel;
+      this._registerService.registerUser(user);
     }
   }
 
