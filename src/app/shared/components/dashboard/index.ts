@@ -1,0 +1,1 @@
+export * from './card-team-create/card-team-create.component';
