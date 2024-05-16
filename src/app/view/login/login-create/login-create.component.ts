@@ -53,7 +53,7 @@ export class LoginCreateComponent implements OnInit {
       const user = this._loginService.login(credentials);
       if (user) {
         this._authService.setSession(user);
-        this._router.navigateByUrl('/home');
+        this._router.navigateByUrl('/home/dashboard');
       }
     }
   }
