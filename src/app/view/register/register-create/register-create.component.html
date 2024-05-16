@@ -1,0 +1,74 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <h2>Registrar usuario</h2>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-12">
+                    <mat-form-field class="full-form-field" appearance="outline">
+                        <mat-label>Usuario</mat-label>
+                        <input type="text" matInput formControlName="username">
+                        @if (getError('username', 'required')) {
+                        <mat-error>
+                            El usuario es required
+                        </mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12">
+                    <mat-form-field class="full-form-field" appearance="outline">
+                        <mat-label>Contraseña</mat-label>
+                        <input type="password" matInput formControlName="password">
+                        @if (getError('password', 'required')) {
+                        <mat-error>
+                            Contraseña es requerida
+                        </mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12">
+                    <mat-form-field class="full-form-field" appearance="outline">
+                        <mat-label>Nombre</mat-label>
+                        <input type="text" matInput formControlName="firstName">
+                        @if(getError('firstName', 'required')) {
+                        <mat-error>
+                            Nombre es requerido
+                        </mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12">
+                    <mat-form-field class="full-form-field" appearance="outline">
+                        <mat-label>Apellido</mat-label>
+                        <input type="text" matInput formControlName="lastName">
+                        @if(getError('lastName', 'required')) {
+                        <mat-error>
+                            Apellido es requerido
+                        </mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-checkbox formControlName="termsAccepted" color="primary">
+                        I agree to the terms and conditions
+                    </mat-checkbox>
+                    @if(getError('termsAccepted', 'required')) {
+                    <mat-error>
+                        Los términos y condiciones son requeridos
+                    </mat-error>
+                    }
+                </div>
+                <div class="col-12">
+                    <button mat-button>Cancelar</button>
+                    <button mat-raised-button color="primary" type="submit">Registrarme</button>
+                </div>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
