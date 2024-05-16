@@ -12,7 +12,19 @@ const routes: Routes = [
             {
                 path: 'dashboard',
                 loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule)
-            }
+            },
+            {
+                path: 'league',
+                loadChildren: () => import('../league/league.module').then(m => m.LeagueModule)
+            },
+            // {
+            //     path: 'team',
+            //     loadChildren: () => import('../team/team.module').then(m => m.TeamModule)
+            // },
+            // {
+            //     path: 'player',
+            //     loadChildren: () => import('../player/player.module').then(m => m.PlayerModule)
+            // }
         ]
     }
 ];
