@@ -5,6 +5,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DialogRef } from '@angular/cdk/dialog';
+import { TeamService } from '../../services/team/team.service';
 
 @Component({
   selector: 'team-create-dialog',
@@ -25,7 +27,9 @@ export class TeamCreateDialogComponent {
   teamForm!: FormGroup;
 
   constructor(
-    private readonly _formBuilder: FormBuilder
+    private readonly _formBuilder: FormBuilder,
+    private readonly _teamService: TeamService,
+    public _dialogRef: DialogRef<TeamCreateDialogComponent>
   ) { }
 
   ngOnInit(): void {
@@ -35,13 +39,13 @@ export class TeamCreateDialogComponent {
   buildForm(): void {
     this.teamForm = this._formBuilder.group({
       teamName: ['', Validators.required],
-      points: ['', Validators.required],
-      playedMatches: ['', Validators.required],
-      wonMatches: ['', Validators.required],
-      drawnMatches: ['', Validators.required],
-      lostMatches: ['', Validators.required],
-      goalsFor: ['', Validators.required],
-      goalsAgainst: ['', Validators.required]
+      // points: ['', Validators.required],
+      // playedMatches: ['', Validators.required],
+      // wonMatches: ['', Validators.required],
+      // drawnMatches: ['', Validators.required],
+      // lostMatches: ['', Validators.required],
+      // goalsFor: ['', Validators.required],
+      // goalsAgainst: ['', Validators.required]
     });
   }
 
@@ -54,7 +58,11 @@ export class TeamCreateDialogComponent {
   }
 
   save() {
-    console.log(this.teamForm.value);
+    if (this.teamForm.valid) {
+      const team = this.teamForm.value;
+      this._teamService.create(team);
+      this._dialogRef.close();
+    }
   }
 
 }
