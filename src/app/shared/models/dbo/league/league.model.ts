@@ -1,4 +1,6 @@
-export interface LeagueModel {
+import { BaseModel } from "../base/base.interface";
+
+export interface LeagueModel extends BaseModel {
     team: string;
     lastDate: Date;
     goalsFor: number;

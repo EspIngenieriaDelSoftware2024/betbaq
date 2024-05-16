@@ -24,13 +24,7 @@ export class InitService {
   createUserAdmin() {
     const data = this._userService.getAll();
     if (!data) {
-      this._userService.create({
-        username: 'admin',
-        password: 'admin',
-        firstName: 'Admin',
-        lastName: 'Admin',
-        termsAccepted: true
-      });
+      this._userService.create(this._userService.addUserAdmin());
     }
   }
 
