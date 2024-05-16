@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { UserService } from '../user/user.service';
-import { CredentialsModel } from '../../models/dto/login/credentials.model';
 import { UserModel } from '../../models/dbo/user/user.model';
+import { CredentialsModel } from '../../models/dto/login/credentials.model';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, type OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { LoginService } from '../../../shared/services/auth/login.service';
 import { CredentialsModel } from '../../../shared/models/dto/login/credentials.model';
 import { AuthService } from '../../../shared/services/auth/auth.service';
+import { LoginService } from '../../../shared/services/auth/login.service';
 
 @Component({
   selector: 'app-login-create',

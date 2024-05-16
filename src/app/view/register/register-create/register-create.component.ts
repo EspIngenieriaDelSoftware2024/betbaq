@@ -8,8 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
-import { RegisterService } from '../../../shared/services/auth/register.service';
 import { UserModel } from '../../../shared/models/dbo/user/user.model';
+import { RegisterService } from '../../../shared/services/auth/register.service';
 
 @Component({
   selector: 'app-register-create',
