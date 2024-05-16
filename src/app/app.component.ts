@@ -9,7 +9,7 @@ import { InitService } from './shared/services/init/init.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
+export class AppComponent{
 
   title = 'betbaq';
 
@@ -17,11 +17,11 @@ export class AppComponent implements OnInit {
     private readonly _initService: InitService,
   ) { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.initData();
   }
 
   initData(): void {
-    this._initService.initData();
+    // this._initService.initData();
   }
 }
