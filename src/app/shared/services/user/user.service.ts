@@ -1,40 +1,28 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from '../storage/storage.service';
 import { UserModel } from '../../models/dbo/user/user.model';
-
-const KEY_ENDPOINT: string = 'users';
+import { BaseService } from '../base/base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService extends BaseService<UserModel> {
+
+  private apiRoot: string;
 
   constructor(
-    private readonly _storageService: StorageService
-  ) { }
-
-  getAll(): UserModel[] {
-    const data = this._storageService.getItem(KEY_ENDPOINT);
-    if (!data) return [];
-    return data;
+    _storageService: StorageService
+  ) {
+    const key = 'users';
+    super(key, _storageService);
+    this.apiRoot = key;
   }
 
-  create(user: UserModel) {
+  getByUsername(username: string): UserModel | null {
     const data = this.getAll();
-    if (!data) {
-      this._storageService.setItem(KEY_ENDPOINT, [user]);
-      return;
-    }
-    data.push(user);
-    this._storageService.setItem(KEY_ENDPOINT, data);
-  }
-
-  getByUsername(username: string): UserModel | undefined {
-    const data = this.getAll();
-    if (!data) {
-      return undefined;
-    }
-    return data.find((user: UserModel) => user.username == username);
+    if (!data) return null;
+    const user = data.find(user => user.username === username);
+    return user ? user : null;
   }
 
 }

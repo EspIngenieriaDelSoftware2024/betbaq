@@ -9,19 +9,28 @@ export class StorageService {
 
 
   setItem(key: string, value: any): void {
-    localStorage.setItem(key, JSON.stringify(value));
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
   }
 
   getItem(key: string): any {
-    const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) : null;
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const item = localStorage.getItem(key);
+      return item ? JSON.parse(item) : null;
+    }
+    return null;
   }
 
   removeItem(key: string): void {
-    localStorage.removeItem(key);
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.removeItem(key);
+    }
   }
 
   clear(): void {
-    localStorage.clear();
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.clear();
+    }
   }
 }

@@ -20,7 +20,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 export class CardTeamCreateComponent implements OnInit {
 
   constructor(
-    public _matDialog: MatDialog
+    private readonly _matDialog: MatDialog
   ) { }
 
 
