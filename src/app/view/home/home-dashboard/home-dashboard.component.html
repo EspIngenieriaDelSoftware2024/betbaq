@@ -20,7 +20,23 @@
         <!-- Encabezado -->
         <mat-toolbar class="header">
             <span>{{nameApp}}</span>
-            <span>{{ firstName }}</span>
+            <div class="row">
+                @if (currentUser) {
+                <div class="content-text-user">
+                    <p class="text-user">{{ currentUser.firstName }} {{ currentUser.lastName }}</p>
+                    <p class="sub-text">Usuario</p>
+                </div>
+                }
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>landscape</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="logout()">
+                        <mat-icon>exit_to_app</mat-icon>
+                        <span>Cerrar sesión</span>
+                    </button>
+                </mat-menu>
+            </div>
         </mat-toolbar>
         <!-- Contenido -->
         <router-outlet></router-outlet>

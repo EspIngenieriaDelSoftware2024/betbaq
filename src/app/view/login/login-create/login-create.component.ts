@@ -9,6 +9,9 @@ import { Router, RouterLink } from '@angular/router';
 import { CredentialsModel } from '../../../shared/models/dto/login/credentials.model';
 import { AuthService } from '../../../shared/services/auth/auth.service';
 import { LoginService } from '../../../shared/services/auth/login.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login-create',
@@ -20,7 +23,9 @@ import { LoginService } from '../../../shared/services/auth/login.service';
     MatFormFieldModule,
     MatCardModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    MatDividerModule,
+    MatIconModule
   ],
   templateUrl: './login-create.component.html',
   styleUrl: './login-create.component.scss',
@@ -28,12 +33,14 @@ import { LoginService } from '../../../shared/services/auth/login.service';
 export class LoginCreateComponent implements OnInit {
 
   public loginForm!: FormGroup;
+  public nameApp: string = '@betbaq';
 
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _loginService: LoginService,
     private readonly _authService: AuthService,
-    private readonly _router: Router
+    private readonly _router: Router,
+    private readonly _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -54,6 +61,9 @@ export class LoginCreateComponent implements OnInit {
       if (user) {
         this._authService.setSession(user);
         this._router.navigateByUrl('/home/dashboard');
+        this._snackBar.open(`Hola! ${user.firstName} 😊`, 'Cerrar', {
+          duration: 2000,
+        });
       }
     }
   }
