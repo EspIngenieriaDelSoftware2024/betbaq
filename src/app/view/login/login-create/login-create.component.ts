@@ -10,6 +10,8 @@ import { CredentialsModel } from '../../../shared/models/dto/login/credentials.m
 import { AuthService } from '../../../shared/services/auth/auth.service';
 import { LoginService } from '../../../shared/services/auth/login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login-create',
@@ -21,7 +23,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatFormFieldModule,
     MatCardModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    MatDividerModule,
+    MatIconModule
   ],
   templateUrl: './login-create.component.html',
   styleUrl: './login-create.component.scss',
@@ -29,6 +33,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LoginCreateComponent implements OnInit {
 
   public loginForm!: FormGroup;
+  public nameApp: string = '@betbaq';
 
   constructor(
     private readonly _formBuilder: FormBuilder,
