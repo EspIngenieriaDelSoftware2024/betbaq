@@ -4,5 +4,24 @@
     .header {
         display: flex;
         justify-content: space-between;
+
+        .content-text-user {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            align-items: center;
+            gap: 0px;
+
+            .text-user {
+                font-size: 20px;
+                margin: 0;
+            }
+
+            .sub-text {
+                font-size: 14px;
+                margin: 0;
+            }
+
+        }
     }
 }
