@@ -1,15 +1,17 @@
 <div class="container flex-login">
     <mat-card>
         <mat-card-header>
-            <mat-card-title align="end">
-                <mat-icon>close</mat-icon>
+            <mat-card-title>
+                <button mat-icon-button [routerLink]="['/register']">
+                    <mat-icon>close</mat-icon>
+                </button>
             </mat-card-title>
         </mat-card-header>
         <mat-card-content>
             <div class="row">
                 <div class="col-4">
                     <h2 class="title-sections">{{nameApp}}</h2>
-                    <img class="image-responsive" src="../../../../assets/icon/icono-betbaq.jpeg" alt="Icono Betbaq">
+                    <img class="image-responsive" src="../../../../assets/icon/icono-betbaq.png" alt="Icono Betbaq">
                 </div>
                 <div class="col-8">
                     <h2 class="title-sections">Inicio de sesión</h2>

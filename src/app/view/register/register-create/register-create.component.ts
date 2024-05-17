@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterLink } from '@angular/router';
 import { UserModel } from '../../../shared/models/dbo/user/user.model';
 import { RegisterService } from '../../../shared/services/auth/register.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-register-create',
@@ -24,7 +25,8 @@ import { RegisterService } from '../../../shared/services/auth/register.service'
     ReactiveFormsModule,
     MatGridListModule,
     MatCardModule,
-    RouterLink
+    RouterLink,
+    MatIconModule
   ],
   templateUrl: './register-create.component.html',
   styleUrl: './register-create.component.scss',
@@ -32,6 +34,7 @@ import { RegisterService } from '../../../shared/services/auth/register.service'
 export class RegisterCreateComponent {
 
   public registrationForm!: FormGroup;
+  public nameApp: string = '@betbaq';
 
   constructor(
     private readonly _formBuilder: FormBuilder,
