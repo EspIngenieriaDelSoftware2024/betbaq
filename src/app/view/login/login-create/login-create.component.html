@@ -1,5 +1,5 @@
 <div class="container flex-login">
-    <mat-card>
+    <mat-card class="w-card">
         <mat-card-header>
             <mat-card-title>
                 <button mat-icon-button [routerLink]="['/register']">
@@ -13,7 +13,7 @@
                     <h2 class="title-sections">{{nameApp}}</h2>
                     <img class="image-responsive" src="../../../../assets/icon/icono-betbaq.png" alt="Icono Betbaq">
                 </div>
-                <div class="col-8">
+                <div class="col-8 form-content">
                     <h2 class="title-sections">Inicio de sesión</h2>
                     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                         <div class="row">
@@ -45,15 +45,11 @@
                             <button mat-raised-button color="primary" type="submit" class="w-100">Iniciar
                                 sesión</button>
                         </div>
+                        <p class="text-register">
+                            No tienes cuenta?
+                            <a mat-button color="primary" [routerLink]="['/register']">Crea una Aquí</a>
+                        </p>
                     </form>
-                    <div class="row">
-                        <div class="col-12">
-                            <p class="text-register">
-                                No tienes cuenta?
-                                <a mat-button color="primary" [routerLink]="['/register']">Crea una Aquí</a>
-                            </p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </mat-card-content>

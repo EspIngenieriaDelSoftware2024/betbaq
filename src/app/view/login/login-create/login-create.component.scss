@@ -22,6 +22,16 @@
     align-items: center;
     height: 100vh;
 
+    .w-card {
+        width: 1260px !important;
+    }
+
+    .form-content {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
     .title-sections {
         width: 100%;
         text-align: center;
