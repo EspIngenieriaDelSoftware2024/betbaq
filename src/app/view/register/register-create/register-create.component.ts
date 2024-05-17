@@ -7,9 +7,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
-import { RouterLink } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router, RouterLink } from '@angular/router';
 import { UserModel } from '../../../shared/models/dbo/user/user.model';
 import { RegisterService } from '../../../shared/services/auth/register.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-register-create',
@@ -23,7 +25,8 @@ import { RegisterService } from '../../../shared/services/auth/register.service'
     ReactiveFormsModule,
     MatGridListModule,
     MatCardModule,
-    RouterLink
+    RouterLink,
+    MatIconModule
   ],
   templateUrl: './register-create.component.html',
   styleUrl: './register-create.component.scss',
@@ -31,10 +34,13 @@ import { RegisterService } from '../../../shared/services/auth/register.service'
 export class RegisterCreateComponent {
 
   public registrationForm!: FormGroup;
+  public nameApp: string = '@betbaq';
 
   constructor(
     private readonly _formBuilder: FormBuilder,
-    private readonly _registerService: RegisterService
+    private readonly _registerService: RegisterService,
+    private readonly _snackBar: MatSnackBar,
+    private readonly _router: Router
   ) { }
 
   ngOnInit(): void {
@@ -55,6 +61,10 @@ export class RegisterCreateComponent {
     if (this.registrationForm.valid) {
       const user = this.registrationForm.getRawValue() as UserModel;
       this._registerService.registerUser(user);
+      this._snackBar.open('Usuario registrado', 'Cerrar', {
+        duration: 2000,
+      });
+      this._router.navigate(['/login']);
     }
   }
 

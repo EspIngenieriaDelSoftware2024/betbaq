@@ -6,12 +6,45 @@
     display: flex;
     justify-content: center;
 
-    button{
+    button {
         width: 60%;
     }
 }
 
-.text-register{
+.text-register {
     width: 100%;
     text-align: center;
+}
+
+.flex-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    .w-card {
+        width: 1260px !important;
+    }
+
+    .form-content {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .title-sections {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.border-left {
+    border-left: 1px solid gray;
+}
+
+
+.image-responsive {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
 }

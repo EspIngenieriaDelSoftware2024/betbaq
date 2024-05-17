@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogRef } from '@angular/cdk/dialog';
 import { TeamService } from '../../services/team/team.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'team-create-dialog',
@@ -29,7 +30,8 @@ export class TeamCreateDialogComponent {
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _teamService: TeamService,
-    public _dialogRef: DialogRef<TeamCreateDialogComponent>
+    public _dialogRef: DialogRef<TeamCreateDialogComponent>,
+    private readonly _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -53,15 +55,14 @@ export class TeamCreateDialogComponent {
     return this.teamForm.controls[controlName].hasError(error);
   }
 
-  cancel(): void {
-    this.teamForm.reset();
-  }
-
   save() {
     if (this.teamForm.valid) {
       const team = this.teamForm.value;
       this._teamService.create(team);
       this._dialogRef.close();
+      this._snackBar.open('Equipo registrado 👥', 'Cerrar', {
+        duration: 2000,
+      });
     }
   }
 

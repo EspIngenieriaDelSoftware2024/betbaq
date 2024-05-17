@@ -15,6 +15,7 @@ import moment from 'moment';
 import { DialogRef } from '@angular/cdk/dialog';
 import { TeamService } from '../../services/team/team.service';
 import { CalculateLeagueService } from '../../services/league/calculate-league.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'match-create-dialog',
@@ -44,6 +45,7 @@ export class MatchCreateDialogComponent implements OnInit {
     private readonly _matchService: MatchService,
     private readonly _teamService: TeamService,
     public _dialogRef: DialogRef<MatchCreateDialogComponent>,
+    private readonly _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -88,6 +90,9 @@ export class MatchCreateDialogComponent implements OnInit {
       };
       this._matchService.createOrUpdate(match);
       this._calculateLeagueService.updateLeagueByMatch();
+      this._snackBar.open('Partido registrado ⚽', 'Cerrar', {
+        duration: 2000,
+      });
       this._dialogRef.close();
     }
   }

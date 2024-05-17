@@ -83,6 +83,26 @@ export class CalculateLeagueService {
     const matches = this._matchService.getAll();
     if (!matches) return;
     const league = this.calculateLeagueTable(matches)
-    if (league) this._leagueService.bulkCreate(league);
+    if (league) {
+      this.sortLeagueTable(league);
+      this._leagueService.bulkCreate(league);
+    }
+  }
+
+  sortLeagueTable(leagueTable: LeagueModel[]): LeagueModel[] {
+    if (!leagueTable) return [];
+    return leagueTable.sort((a, b) => {
+      if (a.points !== b.points) {
+        return b.points - a.points; // Sort by points in descending order
+      } else {
+        const aGoalDifference = a.goalsFor - a.goalsAgainst;
+        const bGoalDifference = b.goalsFor - b.goalsAgainst;
+        if (aGoalDifference !== bGoalDifference) {
+          return bGoalDifference - aGoalDifference; // Sort by goal difference in descending order
+        } else {
+          return b.goalsFor - a.goalsFor;
+        }
+      }
+    });
   }
 }
